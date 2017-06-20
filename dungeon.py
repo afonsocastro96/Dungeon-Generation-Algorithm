@@ -8,8 +8,9 @@ import nothing
 DIVISION_MARGIN = 1
 STRICTNESS = 0.2
 MIN_SECTOR_SIZE = 10
-FLOOR_WIDTH = 40
-FLOOR_HEIGHT = 40
+FLOOR_WIDTH = 100
+FLOOR_HEIGHT = 80
+STAIRS_GENERATION_TIMEOUT = 10000
 
 WALL = '#'
 FLOOR = ' '
@@ -18,8 +19,8 @@ UP_STAIRCASE = '<'
 DOWN_STAIRCASE = '>'
 
 division_probabilities = {
-    'ROOM': 0.8,
-    'MAZE': 0.9,
+    'ROOM': 0.7,
+    'MAZE': 0.75,
     'NOTHING': 1    
 }
 
@@ -216,6 +217,7 @@ class Floor:
     def generate_sectors(self):
         self.root_sector.split()
 
+
     def connect_points(self):
         for connection_to_make in self.connections_to_make:
             x1 = connection_to_make[0][0]
@@ -263,13 +265,21 @@ class Floor:
     def generate_staircases(self):
         x = 0
         y = 0
-        while get_matrix_tile(dungeon, x, y) != FLOOR:
+        timeout = 0
+        tiles_to_search = [FLOOR]
+        while get_matrix_tile(dungeon, x, y) not in tiles_to_search:
+            if timeout > STAIRS_GENERATION_TIMEOUT:
+                tiles_to_search.append(CORRIDOR)
             x = random.randint(1, FLOOR_HEIGHT)
             y = random.randint(1, FLOOR_WIDTH)
+            timeout += 1
         set_matrix_tile(dungeon, x, y, UP_STAIRCASE)
-        while get_matrix_tile(dungeon, x, y) != FLOOR:
+        while get_matrix_tile(dungeon, x, y) not in tiles_to_search:
+            if timeout > STAIRS_GENERATION_TIMEOUT:
+                tiles_to_search.append(CORRIDOR)
             x = random.randint(1, FLOOR_HEIGHT)
             y = random.randint(1, FLOOR_WIDTH)
+            timeout += 1
         set_matrix_tile(dungeon, x, y, DOWN_STAIRCASE)
 
 
