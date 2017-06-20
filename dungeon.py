@@ -272,7 +272,7 @@ class Floor:
             if timeout > STAIRS_GENERATION_TIMEOUT:
                 tiles_to_search.append(CORRIDOR)
             if timeout > STAIRS_GENERATION_TIMEOUT * 2:
-                raise Exception
+                raise Exception('Impossible to generate stairs')
             x = random.randint(1, FLOOR_HEIGHT)
             y = random.randint(1, FLOOR_WIDTH)
             timeout += 1
@@ -281,7 +281,7 @@ class Floor:
             if timeout > STAIRS_GENERATION_TIMEOUT:
                 tiles_to_search.append(CORRIDOR)
             if timeout > STAIRS_GENERATION_TIMEOUT * 2:
-                raise Exception
+                raise Exception('Impossible to generate stairs')
             x = random.randint(1, FLOOR_HEIGHT)
             y = random.randint(1, FLOOR_WIDTH)
             timeout += 1
