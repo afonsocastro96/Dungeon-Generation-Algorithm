@@ -200,7 +200,7 @@ class Sector:
                     floor.connections_to_make.append((self.exit_points[maze.RIGHT], neighbours[chosen_sector].exit_points[maze.LEFT]))
 
     def is_point_in_sector(self, x, y):
-        if x > self.x and x < self.x + self.x_size and y > self.y and y < self.y + self.y_size-1:
+        if x >= self.x and x < self.x + self.x_size and y >= self.y and y < self.y + self.y_size:
             return True
         else:
             return False
