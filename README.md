@@ -8,4 +8,5 @@ python dungeon.py
 ## Example output
 
 https://pastebin.com/jU9FmA4D
+
 https://pastebin.com/raw/fYSx0hCs
