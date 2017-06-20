@@ -8,13 +8,14 @@ import nothing
 DIVISION_MARGIN = 1
 STRICTNESS = 0.2
 MIN_SECTOR_SIZE = 10
-FLOOR_WIDTH = 100
-FLOOR_HEIGHT = 80
-PIVOTS_NO = 10
+FLOOR_WIDTH = 40
+FLOOR_HEIGHT = 40
 
 WALL = '#'
 FLOOR = ' '
 CORRIDOR = '.'
+UP_STAIRCASE = '<'
+DOWN_STAIRCASE = '>'
 
 division_probabilities = {
     'ROOM': 0.8,
@@ -23,7 +24,6 @@ division_probabilities = {
 }
 
 dungeon = []
-pivots = []
 
 
 def split_vertically(sector):
@@ -69,8 +69,9 @@ def init_matrix(matrix, x_size, y_size):
 def set_matrix_tile(matrix, x, y, tile):
     matrix[y][x] = tile
 
-def set_matrix_tile_point(matrix, point, tile):
-    matrix[point[1]][point[0]] = tile
+
+def get_matrix_tile(matrix, x, y):
+    return matrix[y][x]
 
 
 def print_matrix(matrix):
@@ -120,7 +121,6 @@ class Sector:
         floor.sectors.append(self)
 
     def determine_exit_point_directions(self):
-        global pivots
         directions = [maze.UP, maze.DOWN, maze.LEFT, maze.RIGHT]
         if self.x == 1:
             directions.remove(maze.LEFT)
@@ -134,7 +134,6 @@ class Sector:
         exit_points = [(self.x+x+1, self.y+y+1) for (x,y) in self.division.generate_exit_points(directions)]
         for i in range(len(directions)):
             self.exit_points[directions[i]] = exit_points[i]
-        pivots += exit_points
 
     def determine_connections_to_make(self):
         for exit_direction in self.exit_directions:
@@ -260,6 +259,19 @@ class Floor:
                             y1 += 1
                     set_matrix_tile(dungeon, x1, y1, CORRIDOR)
 
+    def generate_staircases(self):
+        x = 0
+        y = 0
+        while get_matrix_tile(dungeon, x, y) != FLOOR:
+            x = random.randint(1, FLOOR_HEIGHT)
+            y = random.randint(1, FLOOR_WIDTH)
+        set_matrix_tile(dungeon, x, y, UP_STAIRCASE)
+        while get_matrix_tile(dungeon, x, y) != FLOOR:
+            x = random.randint(1, FLOOR_HEIGHT)
+            y = random.randint(1, FLOOR_WIDTH)
+        set_matrix_tile(dungeon, x, y, DOWN_STAIRCASE)
+
+
 
 if __name__ == "__main__":
     floor = Floor(FLOOR_HEIGHT, FLOOR_WIDTH)
@@ -267,4 +279,5 @@ if __name__ == "__main__":
     for sector in floor.sectors:
         sector.determine_connections_to_make()
     floor.connect_points()
+    floor.generate_staircases()
     print_matrix(dungeon)
