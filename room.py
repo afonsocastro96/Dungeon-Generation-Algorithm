@@ -48,8 +48,6 @@ def generate_exit_points(self, sides):
     if RIGHT in sides:
         y = random.randint(self.room_y, self.room_y+self.room_y_size-1)
         exit_points.append((self.room_x+self.room_x_size, y))
-    for exit_point in exit_points:
-        self.matrix[exit_point[1]][exit_point[0]] = dungeon.CORRIDOR
     return exit_points
 
 

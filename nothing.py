@@ -17,7 +17,6 @@ class Nothing():
         y = random.randint(0, self.y_size-1)
         while len(exit_points) < len(directions):    
             exit_points.append((x,y))
-            self.matrix[y][x] = dungeon.CORRIDOR
         return exit_points
 
 if __name__ == "__main__":

@@ -160,8 +160,6 @@ def generate_exit_points(sides):
         candidates.append(candidates_aux)
 
     exits = [direction[random.randint(0, len(direction) - 1)] for direction in candidates]
-    for exit in exits:
-        matrix[exit[1]][exit[0]] = dungeon.CORRIDOR
     return exits
 
 

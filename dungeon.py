@@ -222,6 +222,7 @@ class Floor:
             x2 = connection_to_make[1][0]
             y1 = connection_to_make[0][1]
             y2 = connection_to_make[1][1]
+            set_matrix_tile(dungeon, x1, y1, CORRIDOR)
             if abs(x2 - x1) > abs(y2 - y1):
                 if x2 > x1:
                     positions_to_change_y = [random.randint(x1+1, x2-1) for i in range(abs(y2-y1))]
