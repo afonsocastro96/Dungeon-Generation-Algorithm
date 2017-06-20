@@ -1,5 +1,6 @@
 import random
 import math
+import sys
 
 import room
 import maze
@@ -8,8 +9,8 @@ import nothing
 DIVISION_MARGIN = 1
 STRICTNESS = 0.2
 MIN_SECTOR_SIZE = 10
-FLOOR_WIDTH = 100
-FLOOR_HEIGHT = 80
+FLOOR_WIDTH = 40
+FLOOR_HEIGHT = 40
 STAIRS_GENERATION_TIMEOUT = 10000
 
 WALL = '#'
@@ -19,8 +20,8 @@ UP_STAIRCASE = '<'
 DOWN_STAIRCASE = '>'
 
 division_probabilities = {
-    'ROOM': 0.7,
-    'MAZE': 0.75,
+    'ROOM': 0.8,
+    'MAZE': 0.81,
     'NOTHING': 1    
 }
 
@@ -285,6 +286,20 @@ class Floor:
 
 
 if __name__ == "__main__":
+    if len(sys.argv) >= 2:
+        FLOOR_HEIGHT = int(sys.argv[1])
+    if len(sys.argv) >= 3:
+        FLOOR_WIDTH = int(sys.argv[2])
+    if len(sys.argv) >= 4:
+        MIN_SECTOR_SIZE = int(sys.argv[3])
+    if len(sys.argv) >= 5:
+        room.MIN_ROOM_HEIGHT = int(sys.argv[4])
+    if len(sys.argv) >= 6:
+        room.MIN_ROOM_WIDTH = int(sys.argv[5])
+    if len(sys.argv) >= 7:
+        STRICTNESS = float(sys.argv[6])
+    if len(sys.argv) >= 8:
+        STAIRS_GENERATION_TIMEOUT = int(sys.argv[7])
     floor = Floor(FLOOR_HEIGHT, FLOOR_WIDTH)
     floor.generate_sectors()
     for sector in floor.sectors:
