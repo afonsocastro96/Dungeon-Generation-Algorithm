@@ -286,24 +286,27 @@ class Floor:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) >= 2:
-        FLOOR_HEIGHT = int(sys.argv[1])
-    if len(sys.argv) >= 3:
-        FLOOR_WIDTH = int(sys.argv[2])
-    if len(sys.argv) >= 4:
-        MIN_SECTOR_SIZE = int(sys.argv[3])
-    if len(sys.argv) >= 5:
-        room.MIN_ROOM_HEIGHT = int(sys.argv[4])
-    if len(sys.argv) >= 6:
-        room.MIN_ROOM_WIDTH = int(sys.argv[5])
-    if len(sys.argv) >= 7:
-        STRICTNESS = float(sys.argv[6])
-    if len(sys.argv) >= 8:
-        STAIRS_GENERATION_TIMEOUT = int(sys.argv[7])
-    floor = Floor(FLOOR_HEIGHT, FLOOR_WIDTH)
-    floor.generate_sectors()
-    for sector in floor.sectors:
-        sector.determine_connections_to_make()
-    floor.connect_points()
-    floor.generate_staircases()
-    print_matrix(dungeon)
+    try:
+        if len(sys.argv) >= 2:
+            FLOOR_HEIGHT = int(sys.argv[1])
+        if len(sys.argv) >= 3:
+            FLOOR_WIDTH = int(sys.argv[2])
+        if len(sys.argv) >= 4:
+            MIN_SECTOR_SIZE = int(sys.argv[3])
+        if len(sys.argv) >= 5:
+            room.MIN_ROOM_HEIGHT = int(sys.argv[4])
+        if len(sys.argv) >= 6:
+            room.MIN_ROOM_WIDTH = int(sys.argv[5])
+        if len(sys.argv) >= 7:
+            STRICTNESS = float(sys.argv[6])
+        if len(sys.argv) >= 8:
+            STAIRS_GENERATION_TIMEOUT = int(sys.argv[7])
+        floor = Floor(FLOOR_HEIGHT, FLOOR_WIDTH)
+        floor.generate_sectors()
+        for sector in floor.sectors:
+            sector.determine_connections_to_make()
+        floor.connect_points()
+        floor.generate_staircases()
+        print_matrix(dungeon)
+    except Exception:
+        print "Error while generating dungeon floor. Please choose different arguments or try again."
