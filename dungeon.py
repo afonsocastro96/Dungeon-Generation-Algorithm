@@ -292,9 +292,9 @@ class Floor:
 if __name__ == "__main__":
     try:
         if len(sys.argv) >= 2:
-            FLOOR_HEIGHT = int(sys.argv[1])
+            FLOOR_HEIGHT = int(sys.argv[1] - 2)
         if len(sys.argv) >= 3:
-            FLOOR_WIDTH = int(sys.argv[2])
+            FLOOR_WIDTH = int(sys.argv[2] - 2)
         if len(sys.argv) >= 4:
             MIN_SECTOR_SIZE = int(sys.argv[3])
         if len(sys.argv) >= 5:
