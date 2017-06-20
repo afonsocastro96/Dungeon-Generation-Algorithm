@@ -3,8 +3,10 @@ The initial implementation of the Dungeon Generation Algorithm we use in Earthbo
 
 ## Run
 
-python dungeon.py
+`python dungeon.py`
 
 ## Example output
+
+https://pastebin.com/raw/jU9FmA4D
 
 https://pastebin.com/raw/fYSx0hCs
