@@ -271,6 +271,8 @@ class Floor:
         while get_matrix_tile(dungeon, x, y) not in tiles_to_search:
             if timeout > STAIRS_GENERATION_TIMEOUT:
                 tiles_to_search.append(CORRIDOR)
+            if timeout > STAIRS_GENERATION_TIMEOUT * 2:
+                raise Exception
             x = random.randint(1, FLOOR_HEIGHT)
             y = random.randint(1, FLOOR_WIDTH)
             timeout += 1
@@ -278,6 +280,8 @@ class Floor:
         while get_matrix_tile(dungeon, x, y) not in tiles_to_search:
             if timeout > STAIRS_GENERATION_TIMEOUT:
                 tiles_to_search.append(CORRIDOR)
+            if timeout > STAIRS_GENERATION_TIMEOUT * 2:
+                raise Exception
             x = random.randint(1, FLOOR_HEIGHT)
             y = random.randint(1, FLOOR_WIDTH)
             timeout += 1
