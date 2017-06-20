@@ -7,6 +7,6 @@ The initial implementation of the Dungeon Generation Algorithm we use in Earthbo
 
 ## Example output
 
-https://pastebin.com/jU9FmA4D
+https://pastebin.com/raw/jU9FmA4D
 
 https://pastebin.com/raw/fYSx0hCs
